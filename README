@@ -1,0 +1,4 @@
+# go-stock-ticker
+---
+A small CLI utility to check stock tickers, written in `Go`
+
