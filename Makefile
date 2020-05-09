@@ -3,7 +3,7 @@ BINARY := go-stock-ticker
 BUILD_DIR := build
 
 
-all: clean test build run
+all: clean test build
 
 clean:
 	$(GOCMD) clean

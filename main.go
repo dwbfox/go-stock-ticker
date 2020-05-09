@@ -1,18 +1,17 @@
 package main
 
 import (
+	"flag"
 	"fmt"
-	"os"
+	"strings"
 )
 
 func main() {
 	var stocks []Stock
-	cmdargs := os.Args[1:]
-	if len(cmdargs) <= 0 {
-		fmt.Println("Please provide a stock symbol to quote.")
-		os.Exit(1)
-	}
-	stocks, err := GetQuotesBulk(cmdargs)
+	symbolPtr := flag.String("symbol", "", "The stock symbol to lookup. Can pass multiple comma-delimited symbols.")
+	flag.Parse()
+	symbolArgs := strings.Split(*symbolPtr, ",")
+	stocks, err := GetQuotesBulk(symbolArgs)
 	if err != nil {
 		panic(fmt.Sprintf("Error attempting to fetch stocks: %v", err))
 	}

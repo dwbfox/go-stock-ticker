@@ -14,7 +14,6 @@ import (
 
 type Stock struct {
 	PreviousClose float32
-	Name          string
 	Volume        int64
 	Identifier    string
 	Ask           float32
@@ -23,6 +22,9 @@ type Stock struct {
 	Outcome       string
 	AskSize       uint32
 	BidSize       uint32
+	Time          string
+	Date          string
+	Security      string
 }
 
 func GetQuotesBulk(symbols []string) ([]Stock, error) {
@@ -56,6 +58,7 @@ func GetQuote(symbol Stock) (Stock, error) {
 	rawResult = strings.ReplaceAll(rawResult, ");", "")
 	// parse the clenaed up JSON
 	json.Unmarshal([]byte(rawResult), &symbol)
+
 	return symbol, nil
 }
 
