@@ -1,6 +1,9 @@
 package main
 
-import "testing"
+import (
+	"log"
+	"testing"
+)
 
 func TestInvalidStock(t *testing.T) {
 	invalidStock := Stock{}
@@ -9,7 +12,6 @@ func TestInvalidStock(t *testing.T) {
 		t.Errorf("Got GOOD result for known BAD stock struct: %v\n", err)
 		t.Failed()
 	}
-
 }
 
 func TestValidStock(t *testing.T) {
@@ -25,4 +27,6 @@ func TestValidStock(t *testing.T) {
 	if result.PreviousClose == 0.00 {
 		t.Errorf("Unexpected result from known good stock: %v\n", result)
 	}
+
+	log.Printf("Resulting stock struct: %v", result)
 }

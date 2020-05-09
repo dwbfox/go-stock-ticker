@@ -3,7 +3,7 @@ BINARY := go-stock-ticker
 BUILD_DIR := build
 
 
-all: test build
+all: clean test build run
 
 clean:
 	$(GOCMD) clean
@@ -16,3 +16,6 @@ build:
 
 test:
 	$(GOCMD) test
+
+run:
+	$(BUILD_DIR)/$(BINARY) TSLA
