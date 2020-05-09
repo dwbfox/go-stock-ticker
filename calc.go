@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"log"
@@ -56,9 +57,10 @@ func GetQuote(symbol Stock) (Stock, error) {
 	rawResult := string(body)
 	rawResult = strings.ReplaceAll(rawResult, "ddg_spice_stocks(", "")
 	rawResult = strings.ReplaceAll(rawResult, ");", "")
-	// parse the clenaed up JSON
 	json.Unmarshal([]byte(rawResult), &symbol)
-
+	if symbol.Outcome != "Success" {
+		return Stock{}, errors.New(fmt.Sprintf("API call succeeded, but symbol was invalid: %s\n", symbol.Identifier))
+	}
 	return symbol, nil
 }
 
