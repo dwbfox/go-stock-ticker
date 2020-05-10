@@ -5,7 +5,7 @@ A small CLI utility to check stock tickers, written in `Go`
 ## Usage:
 
 #### Download and Build
-1. Clone repository:
+1. clone repository:
 ```bash
 $ git@github.com:dwbfox/go-stock-ticker.git
 ```
