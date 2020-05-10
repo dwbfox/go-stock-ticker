@@ -2,12 +2,12 @@ package main
 
 import (
 	"encoding/json"
-	"errors"
 	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
+	"regexp"
 	"strings"
 
 	"github.com/olekukonko/tablewriter"
@@ -28,6 +28,11 @@ type Stock struct {
 	Security      string
 }
 
+func IsValidSymbol(symbol string) bool {
+	re := regexp.MustCompile(`^[A-Za-z0-9.]+$`)
+	return re.MatchString(symbol)
+}
+
 func GetQuotesBulk(symbols []string) ([]Stock, error) {
 	var stocks []Stock
 	for _, symbol := range symbols {
@@ -43,6 +48,9 @@ func GetQuotesBulk(symbols []string) ([]Stock, error) {
 }
 
 func GetQuote(symbol Stock) (Stock, error) {
+	if !IsValidSymbol(symbol.Identifier) {
+		return Stock{}, fmt.Errorf("invalid stock symbol provided: %s", symbol.Identifier)
+	}
 	endpoint := "https://duckduckgo.com/js/spice/stocks/%s"
 	resp, err := http.Get(fmt.Sprintf(endpoint, symbol.Identifier))
 	if err != nil {
@@ -59,7 +67,7 @@ func GetQuote(symbol Stock) (Stock, error) {
 	rawResult = strings.ReplaceAll(rawResult, ");", "")
 	json.Unmarshal([]byte(rawResult), &symbol)
 	if symbol.Outcome != "Success" {
-		return Stock{}, errors.New(fmt.Sprintf("API call succeeded, but symbol was invalid: %s\n", symbol.Identifier))
+		return Stock{}, fmt.Errorf("api call succeeded, but symbol was invalid: %s", symbol.Identifier)
 	}
 	return symbol, nil
 }

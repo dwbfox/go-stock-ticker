@@ -1,7 +1,6 @@
 package main
 
 import (
-	"log"
 	"testing"
 )
 
@@ -10,6 +9,17 @@ func TestInvalidStock(t *testing.T) {
 	result, err := GetQuote(invalidStock)
 	if err == nil && result.Identifier == "0" {
 		t.Errorf("Got GOOD result for known BAD stock struct: %v\n", err)
+		t.Failed()
+	}
+}
+
+func TestInvalidSymbol(t *testing.T) {
+	invalidSymbolStock := Stock{
+		Identifier: "BRK_A",
+	}
+	_, err := GetQuote(invalidSymbolStock)
+	if err == nil {
+		t.Errorf("Got good result for an invalid symbol format!")
 		t.Failed()
 	}
 }
@@ -27,6 +37,4 @@ func TestValidStock(t *testing.T) {
 	if result.PreviousClose == 0.00 {
 		t.Errorf("Unexpected result from known good stock: %v\n", result)
 	}
-
-	log.Printf("Resulting stock struct: %v", result)
 }
