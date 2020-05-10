@@ -1,7 +1,9 @@
 GOCMD := /usr/bin/go
 BINARY := go-stock-ticker
 BUILD_DIR := build
+SRC_DIR := src/
 
+.PHONY: clean build
 
 all: clean test build
 
@@ -12,10 +14,10 @@ clean:
 
 build:
 	mkdir -p build
-	$(GOCMD) build -o $(BUILD_DIR)/$(BINARY) 
+	$(GOCMD) build $(SRC_DIR)* -o $(BUILD_DIR)/$(BINARY) 
 
 test:
-	$(GOCMD) test
+	$(GOCMD) test $(SRC_DIR)/
 
 run:
 	$(BUILD_DIR)/$(BINARY) TSLA
