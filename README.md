@@ -1,6 +1,6 @@
 # go-stock-ticker
 ---
-A small CLI utility to check stock tickers, written in `Go`
+A small CLI utility to check tickers, written in `Go`
 
 ## Usage:
 
@@ -10,7 +10,7 @@ A small CLI utility to check stock tickers, written in `Go`
 $ git@github.com:dwbfox/go-stock-ticker.git
 ```
 
-2. cd into project directory
+2. `cd` into project directory
 ```
 $ cd ./go-stock-ticker
 ```
