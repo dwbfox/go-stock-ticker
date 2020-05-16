@@ -13,61 +13,67 @@ import (
 	"github.com/olekukonko/tablewriter"
 )
 
+// Stock struct of a single ticker/symbol containing
+// various information about said ticker.
 type Stock struct {
-	TradingHalted                  bool    `json:"TradingHalted"`
-	Low52Weeks                     float64 `json:"Low52Weeks"`
-	High52Weeks                    float64 `json:"High52Weeks"`
-	AskSize                        int     `json:"AskSize"`
-	Ask                            float64 `json:"Ask"`
-	BidSize                        int     `json:"BidSize"`
-	Bid                            float64 `json:"Bid"`
-	PercentChangeFromPreviousClose float64 `json:"PercentChangeFromPreviousClose"`
-	ChangeFromPreviousClose        float64 `json:"ChangeFromPreviousClose"`
-	PreviousClose                  float64 `json:"PreviousClose"`
-	Volume                         int     `json:"Volume"`
-	LastSize                       int     `json:"LastSize"`
-	Last                           float64 `json:"Last"`
-	Low                            float64 `json:"Low"`
-	High                           float64 `json:"High"`
-	Close                          float64 `json:"Close"`
-	Open                           float64 `json:"Open"`
-	UTCOffset                      int     `json:"UTCOffset"`
-	Delay                          float64 `json:"Delay"`
-	Outcome                        string  `json:"Outcome"`
+	TradingHalted                  bool
+	Low52Weeks                     float64
+	High52Weeks                    float64
+	AskSize                        int
+	Ask                            float64
+	BidSize                        int
+	Bid                            float64
+	PercentChangeFromPreviousClose float64
+	ChangeFromPreviousClose        float64
+	PreviousClose                  float64
+	Volume                         int
+	LastSize                       int
+	Last                           float64
+	Low                            float64
+	High                           float64
+	Close                          float64
+	Open                           float64
+	UTCOffset                      int
+	Delay                          float64
+	Outcome                        string
 	Security                       struct {
-		MostLiquidExchange       bool        `json:"MostLiquidExchange"`
-		CategoryOrIndustry       string      `json:"CategoryOrIndustry"`
-		MarketIdentificationCode string      `json:"MarketIdentificationCode"`
-		Market                   string      `json:"Market"`
-		Name                     string      `json:"Name"`
-		Valoren                  string      `json:"Valoren"`
-		ISIN                     interface{} `json:"ISIN"`
-		Symbol                   string      `json:"Symbol"`
-		CUSIP                    interface{} `json:"CUSIP"`
-		CIK                      string      `json:"CIK"`
-	} `json:"Security"`
-	IdentifierType               string `json:"IdentifierType"`
-	Identifier                   string `json:"Identifier"`
-	LastMarketIdentificationCode string `json:"LastMarketIdentificationCode"`
-	AskMarketIdentificationCode  string `json:"AskMarketIdentificationCode"`
-	BidMarketIdentificationCode  string `json:"BidMarketIdentificationCode"`
-	Currency                     string `json:"Currency"`
-	AskTime                      string `json:"AskTime"`
-	AskDate                      string `json:"AskDate"`
-	BidTime                      string `json:"BidTime"`
-	BidDate                      string `json:"BidDate"`
-	PreviousCloseDate            string `json:"PreviousCloseDate"`
-	Time                         string `json:"Time"`
-	Date                         string `json:"Date"`
-	Identity                     string `json:"Identity"`
-	Message                      string `json:"Message"`
+		MostLiquidExchange       bool
+		CategoryOrIndustry       string
+		MarketIdentificationCode string
+		Market                   string
+		Name                     string
+		Valoren                  string
+		ISIN                     interface{}
+		Symbol                   string
+		CUSIP                    interface{}
+		CIK                      string
+	}
+	IdentifierType               string
+	Identifier                   string
+	LastMarketIdentificationCode string
+	AskMarketIdentificationCode  string
+	BidMarketIdentificationCode  string
+	Currency                     string
+	AskTime                      string
+	AskDate                      string
+	BidTime                      string
+	BidDate                      string
+	PreviousCloseDate            string
+	Time                         string
+	Date                         string
+	Identity                     string
+	Message                      string
 }
 
-func IsValidSymbol(symbol string) bool {
+func isValidSymbol(symbol string) bool {
 	re := regexp.MustCompile(`^[A-Za-z0-9.:]+$`)
 	return re.MatchString(symbol)
 }
 
+// GetQuotesBulk given a string slice, returns
+// a slice of Stock structs containing requested
+// stock information.
+// See: GetQuotes
 func GetQuotesBulk(symbols []string) ([]Stock, error) {
 	var stocks []Stock
 	for _, symbol := range symbols {
@@ -82,8 +88,11 @@ func GetQuotesBulk(symbols []string) ([]Stock, error) {
 	return stocks, nil
 }
 
+// GetQuote returns a Stock struct
+// for a single stock ticker that is passed
+// in as a Stock struct
 func GetQuote(symbol Stock) (Stock, error) {
-	if !IsValidSymbol(symbol.Identifier) {
+	if !isValidSymbol(symbol.Identifier) {
 		return Stock{}, fmt.Errorf("invalid stock symbol provided: %s", symbol.Identifier)
 	}
 	endpoint := "https://duckduckgo.com/js/spice/stocks/%s"
