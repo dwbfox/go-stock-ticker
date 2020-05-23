@@ -9,8 +9,8 @@ func TestInvalidStock(t *testing.T) {
 	result, err := GetQuote(invalidStock)
 	if err == nil && result.Identifier == "0" {
 		t.Errorf("Got GOOD result for known BAD stock struct: %v\n", err)
-		t.Failed()
 	}
+	t.Errorf("No")
 }
 
 func TestInvalidSymbol(t *testing.T) {
