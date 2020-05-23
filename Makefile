@@ -1,4 +1,4 @@
-GOCMD := /usr/bin/go
+GOCMD := go
 BINARY := go-stock-ticker
 BUILD_DIR := bin
 SRC_DIR := src
