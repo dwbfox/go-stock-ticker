@@ -5,11 +5,15 @@ SRC_DIR := src
 
 .PHONY: clean
 
-all: clean test build
+all: clean dep test build
+
+dep:
+	$(GOCMD) get github.com/olekukonko/tablewriter
 
 clean:
 	$(GOCMD) clean
 	rm -rf $(BUILD_DIR)
+
 build:
 	mkdir -p $(BUILD_DIR)
 	cd $(SRC_DIR)/; $(GOCMD) build -o ../$(BUILD_DIR)/$(BINARY) 
