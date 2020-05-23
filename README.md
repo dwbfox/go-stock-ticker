@@ -2,6 +2,8 @@
 ---
 A small CLI utility to check tickers, written in `Go`
 
+[![Build Status](https://travis-ci.com/dwbfox/go-stock-ticker.svg?branch=master)](https://travis-ci.com/dwbfox/go-stock-ticker)
+
 ## Usage:
 
 #### Download and Build
