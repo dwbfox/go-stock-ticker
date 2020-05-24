@@ -1,8 +1,10 @@
 # go-stock-ticker
 ---
-A small CLI utility to check tickers, written in `Go`
+A small CLI utility to check tickers, written in `Go` 
 
-[![Build Status](https://travis-ci.com/dwbfox/go-stock-ticker.svg?branch=master)](https://travis-ci.com/dwbfox/go-stock-ticker)
+- master: [![Build Status](https://travis-ci.com/dwbfox/go-stock-ticker.svg?branch=master)](https://travis-ci.com/dwbfox/go-stock-ticker)
+- dev: [![Build Status](https://travis-ci.com/dwbfox/go-stock-ticker.svg?branch=dev)](https://travis-ci.com/dwbfox/go-stock-ticker)
+
 
 ## Usage:
 
