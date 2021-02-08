@@ -2,8 +2,8 @@
 ---
 A small CLI utility to check tickers, written in `Go` 
 
-- master: [![Build Status](https://travis-ci.com/dwbfox/go-stock-ticker.svg?branch=master)](https://travis-ci.com/dwbfox/go-stock-ticker)
-- dev: [![Build Status](https://travis-ci.com/dwbfox/go-stock-ticker.svg?branch=dev)](https://travis-ci.com/dwbfox/go-stock-ticker)
+[![Go Report Card](https://goreportcard.com/badge/github.com/dwbfox/go-stock-ticker)](https://goreportcard.com/report/github.com/dwbfox/go-stock-ticker)
+master: [![Build Status](https://travis-ci.com/dwbfox/go-stock-ticker.svg?branch=master)](https://travis-ci.com/dwbfox/go-stock-ticker)
 
 
 ## Usage:
